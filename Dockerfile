@@ -10,7 +10,9 @@ ENV ACMESH_VERSION=${ACMESH_VERSION} \
     COMPANION_VERSION=${GIT_DESCRIBE} \
     DOCKER_HOST=unix:///var/run/docker.sock \
     PATH=${PATH}:/app
-
+# Add ipa private key
+COPY ca.pem /usr/local/share/ca-certificates/ipa-ca.crt
+RUN cat /usr/local/share/ca-certificates/ipa-ca.crt >> /etc/ssl/certs/ca-certificates.crt
 # Install packages required by the image
 RUN apk add --no-cache --virtual .bin-deps \
     bash \

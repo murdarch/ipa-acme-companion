@@ -166,7 +166,9 @@ function update_cert {
     fi
 
     # CLI parameters array used for --register-account
-    local -a params_register_arr
+
+
+   local -a params_register_arr
 
     # CLI parameters array used for --issue
     local -a params_issue_arr
@@ -377,6 +379,7 @@ function update_cert {
     fi
 
     # Account registration and update if required
+    params_register_arr+=(-ak "$DEFAULT_KEY_SIZE")
     if [[ ! -f "$account_file" ]]; then
         params_register_arr=("${params_base_arr[@]}" "${params_register_arr[@]}")
         [[ "$DEBUG" == 1 ]] && echo "Calling acme.sh --register-account with the following parameters : ${params_register_arr[*]}"
