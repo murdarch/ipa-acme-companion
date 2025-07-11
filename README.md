@@ -6,6 +6,13 @@
 
 **acme-companion** is a lightweight companion container for [**nginx-proxy**](https://github.com/nginx-proxy/nginx-proxy).
 
+**ipa-acme-companion** is a small modidification to acme-companion allowing it to work directly with FreeIPA's bundled CA. By default, upstream acme-companion creates an account key 
+with EC-256 encryption, which is not supported by DogtagPKI in FreeIPA.
+
+Simply copy the IPA cert from an enrolled machine (usually in /etc/ipa) to ca.pem, then docker build. The build adds it to the container's trusted certs, and modifies one line in letsencrypt_service
+to honor the default key size variable supplied to docker on the command line or in the docker compose file.
+
+
 It handles the automated creation, renewal and use of SSL certificates for proxied Docker containers through the ACME protocol.
 
 ### Features:
